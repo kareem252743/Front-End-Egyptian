@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Egyptian Space Portfolio</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Cairo',sans-serif;
+    }
+
+    body{
+      overflow:hidden;
+      background:#0f0a05;
+      color:white;
+      user-select:none;
+    }
+
+    .hero{
+      width:100%;
+      height:100vh;
+      position:relative;
+      overflow:hidden;
+
+      background:
+      radial-gradient(circle at center,rgba(212,176,109,.10) 0%,transparent 35%),
+      radial-gradient(circle at top,rgba(255,204,120,.08) 0%,transparent 40%),
+      linear-gradient(to bottom,#1a1208,#0f0a05);
+
+    }
+
+    .hero::before{
+      content:"";
+
+      position:absolute;
+      inset:0;
+
+      background:
+      url("https://www.transparenttextures.com/patterns/arabesque.png");
+
+      opacity:.08;
+
+      mix-blend-mode:screen;
+    }
+
+    .stars{
+      position:absolute;
+      width:100%;
+      height:100%;
+
+      background:url("https://www.transparenttextures.com/patterns/stardust.png");
+
+      opacity:.35;
+
+      animation: starsMove 120s linear infinite;
+    }
+
+    @keyframes starsMove{
+
+      from{
+        transform:translateY(0);
+      }
+
+      to{
+        transform:translateY(-1000px);
+      }
+
+    }
+
+    /* الهرم */
+
+    .planet{
+      position:absolute;
+      width:420px;
+      height:420px;
+
+      top:50%;
+      left:50%;
+
+      transform:translate(-50%,-50%);
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      animation:pyramidFloat 8s ease-in-out infinite;
+    }
+
+    .planet::before{
+      content:"";
+
+      position:absolute;
+
+      width:0;
+      height:0;
+
+      border-left:210px solid transparent;
+      border-right:210px solid transparent;
+      border-bottom:360px solid #c89b52;
+
+      filter:
+      drop-shadow(0 0 30px rgba(255,210,120,.35))
+      drop-shadow(0 0 90px rgba(255,180,80,.18));
+    }
+
+    .planet::after{
+      content:"𓂀";
+
+      position:absolute;
+
+      font-size:120px;
+      font-weight:bold;
+
+      color:#5e350d;
+
+      top:155px;
+
+      text-shadow:
+      0 0 8px rgba(255,255,255,.08),
+      0 0 15px rgba(0,0,0,.35);
+    }
+
+    @keyframes pyramidFloat{
+
+      0%{
+        transform:translate(-50%,-50%) translateY(0px);
+      }
+
+      50%{
+        transform:translate(-50%,-50%) translateY(-12px);
+      }
+
+      100%{
+        transform:translate(-50%,-50%) translateY(0px);
+      }
+
+    }
+
+    nav{
+      width:100%;
+      position:absolute;
+      top:0;
+      left:0;
+      padding:25px 80px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      z-index:10;
+    }
+
+    .logo{
+      font-size:46px;
+      font-weight:800;
+      letter-spacing:4px;
+
+      color:#f5d08b;
+
+      text-shadow:
+      0 0 12px rgba(255,220,150,.7),
+      0 0 30px rgba(255,180,80,.35);
+    }
+
+    .content{
+      width:100%;
+      height:100%;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      padding:0 100px;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .text{
+      width:38%;
+      margin-left:120px;
+    }
+
+    .small{
+      letter-spacing:5px;
+
+      color:#e0b96d;
+
+      margin-bottom:15px;
+
+      font-size:12px;
+    }
+
+    .text h1{
+      font-size:76px;
+      line-height:1.1;
+      margin-bottom:20px;
+
+      text-transform:uppercase;
+
+      background:
+      linear-gradient(
+      to bottom,
+      #fff6d7,
+      #e6b566,
+      #b98032
+      );
+
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .text p{
+      font-size:17px;
+      color:#f0dfbf;
+
+      margin-bottom:35px;
+      line-height:2;
+
+      max-width:420px;
+
+      background:rgba(255,215,120,.05);
+
+      padding:14px 18px;
+
+      border-radius:14px;
+
+      backdrop-filter:blur(4px);
+
+      border:1px solid rgba(255,220,150,.12);
+    }
+
+    .explore{
+      display:inline-block;
+
+      padding:14px 35px;
+
+      border-radius:50px;
+
+      border:1px solid #d9a34f;
+
+      color:#fff3d1;
+
+      text-decoration:none;
+
+      transition:.4s;
+
+      background:rgba(255,215,120,.05);
+    }
+
+    .explore:hover{
+
+      background:#c48b37;
+
+      color:white;
+
+      box-shadow:
+      0 0 25px rgba(255,190,90,.5);
+    }
+
+    /* رمز مفتاح الحياة */
+
+    .frame-wrapper{
+      width:40%;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      position:relative;
+    }
+
+    .ankh-box{
+
+      width:350px;
+      height:500px;
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      position:relative;
+
+      animation: floatX 7s ease-in-out infinite;
+    }
+
+    .ankh{
+
+      font-size:280px;
+
+      color:#d6b36a;
+
+      text-shadow:
+      0 0 20px rgba(255,210,120,.5),
+      0 0 50px rgba(255,180,80,.25),
+      0 0 90px rgba(255,180,80,.15);
+
+      animation:ankhGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes ankhGlow{
+
+      0%{
+        transform:scale(1);
+      }
+
+      50%{
+        transform:scale(1.04);
+      }
+
+      100%{
+        transform:scale(1);
+      }
+
+    }
+
+    @keyframes floatX{
+
+      0%{
+        transform:translateX(0px);
+      }
+
+      50%{
+        transform:translateX(40px);
+      }
+
+      100%{
+        transform:translateX(0px);
+      }
+
+    }
+
+    .bottom{
+      position:absolute;
+
+      bottom:30px;
+      left:50%;
+
+      transform:translateX(-50%);
+
+      width:85%;
+
+      display:flex;
+      justify-content:space-around;
+
+      padding:25px;
+
+      border-radius:20px;
+
+      background:rgba(255,215,120,.04);
+
+      backdrop-filter:blur(15px);
+
+      border:1px solid rgba(255,220,150,.12);
+
+      z-index:5;
+    }
+
+    .card{
+      text-align:center;
+    }
+
+    .card h2{
+      color:#f1c574;
+      margin-bottom:5px;
+    }
+
+    .card p{
+      color:#f3dfba;
+      font-size:14px;
+    }
+
+    @media(max-width:1100px){
+
+      .content{
+        flex-direction:column;
+        justify-content:center;
+        gap:60px;
+        text-align:center;
+      }
+
+      .text{
+        width:100%;
+        margin-left:0;
+      }
+
+      .frame-wrapper{
+        width:100%;
+      }
+
+      .text h1{
+        font-size:55px;
+      }
+
+      .bottom{
+        display:none;
+      }
+
+      body{
+        overflow:auto;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<section class="hero">
+
+  <div class="stars"></div>
+
+  <div class="planet"></div>
+
+  <nav>
+
+    <div class="logo">
+      KARIM
+    </div>
+
+  </nav>
+
+  <div class="content">
+
+    <div class="text">
+
+      <div class="small">
+        FRONTEND DEVELOPER
+      </div>
+
+      <h1>
+        I AM <br>
+        EGYPTIAN
+      </h1>
+
+      <p>
+  Professional Frontend Developer passionate about
+  building modern, fast, and fully responsive websites
+  for all devices, while continuously improving my
+  skills in Full Stack Development
+</p>
+
+      <a
+        href="https://wa.me/201063566783"
+        class="explore"
+        target="_blank">
+
+        WhatsApp Contact
+
+      </a>
+
+    </div>
+
+    <div class="frame-wrapper">
+
+      <div class="ankh-box">
+
+        <div class="ankh">
+          ☥
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="bottom">
+
+    <div class="card">
+      <h2>20</h2>
+      <p>YEARS OLD</p>
+    </div>
+
+    <div class="card">
+      <h2>SGU</h2>
+      <p>UNIVERSITY</p>
+    </div>
+
+    <div class="card">
+      <h2>EGYPT</h2>
+      <p>COUNTRY</p>
+    </div>
+
+    <div class="card">
+      <h2>FRONTEND</h2>
+      <p>SPECIALIST</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- حماية الموقع -->
+
+<script>
+
+  // منع كليك يمين
+  document.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+  });
+
+  // منع النسخ والتحديد
+  document.addEventListener('copy', function(e){
+    e.preventDefault();
+  });
+
+  document.addEventListener('cut', function(e){
+    e.preventDefault();
+  });
+
+  document.addEventListener('selectstart', function(e){
+    e.preventDefault();
+  });
+
+  // منع بعض الاختصارات
+  document.addEventListener('keydown', function(e){
+
+    // F12
+    if(e.key === "F12"){
+      e.preventDefault();
+    }
+
+    // F11
+    if(e.key === "F11"){
+      e.preventDefault();
+    }
+
+    // Ctrl + Shift + I
+    if(e.ctrlKey && e.shiftKey && e.key === "I"){
+      e.preventDefault();
+    }
+
+    // Ctrl + Shift + J
+    if(e.ctrlKey && e.shiftKey && e.key === "J"){
+      e.preventDefault();
+    }
+
+    // Ctrl + U
+    if(e.ctrlKey && e.key.toLowerCase() === "u"){
+      e.preventDefault();
+    }
+
+    // Ctrl + C
+    if(e.ctrlKey && e.key.toLowerCase() === "c"){
+      e.preventDefault();
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
