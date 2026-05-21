@@ -7,185 +7,98 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            margin:0; padding:0; box-sizing:border-box;
-            font-family:'Cairo', sans-serif;
-            -webkit-touch-callout: none;
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo', sans-serif; -webkit-touch-callout: none; }
+        body { background:#0f0a05; color:white; overflow-x:hidden; user-select:none; }
+
+        /* --- تأثير المطر الرملي (Sand Rain) --- */
+        .sand-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1; overflow: hidden;
+        }
+        .sand-grain {
+            position: absolute; width: 2px; height: 10px;
+            background: rgba(214, 179, 106, 0.3);
+            border-radius: 2px;
+            animation: rainFall linear infinite;
+        }
+        @keyframes rainFall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
         }
 
-        body {
-            background:#0f0a05;
-            color:white;
-            /* السماح بالتمرير عند الحاجة في الشاشات الصغيرة */
-            overflow-x:hidden; 
-            overflow-y:auto;
-            user-select:none;
+        /* --- LOGIN SCREEN (Pharaonic Theme) --- */
+        .login-screen { position:fixed; inset:0; background:radial-gradient(circle at center, #1a140a 0%, #0b0703 100%); display:flex; justify-content:center; align-items:center; z-index:99999; transition: opacity 0.8s ease; }
+        .login-box { 
+            text-align:center; padding:50px; border-radius:10px; 
+            background:rgba(20, 15, 8, 0.8); 
+            border: 2px solid #c48b37;
+            box-shadow: 0 0 30px rgba(196, 139, 55, 0.2), inset 0 0 20px rgba(196, 139, 55, 0.1);
+            width: 90%; max-width: 400px;
+            position: relative;
         }
-
-        /* شاشة الدخول - English */
-        .login-screen {
-            position:fixed; inset:0; background:#0b0703;
-            display:flex; justify-content:center; align-items:center;
-            z-index:99999; transition: opacity 0.8s ease;
+        .login-box::before { content: "𓋹"; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: #c48b37; font-size: 24px; }
+        .shine-text { 
+            background: linear-gradient(90deg, #b8860b, #ffd700, #ffffff, #ffd700, #b8860b); 
+            background-size: 300% 100%; 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            animation: slowShine 4s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
-
-        .login-box {
-            text-align:center; padding:40px;
-            border-radius:20px; background:rgba(255,215,120,.05);
-            border:1px solid rgba(255,220,150,.15);
-            backdrop-filter:blur(10px); width: 90%; max-width: 400px;
+        @keyframes slowShine { 0% { background-position: 100% 0; } 100% { background-position: -200% 0; } }
+        
+        .login-box button { 
+            padding:14px 45px; border:1px solid #c48b37; border-radius:0px; 
+            background:transparent; color:#f5d08b; font-size:16px; cursor:pointer; 
+            transition:.4s; text-transform: uppercase; font-weight: bold; margin-top: 20px;
         }
-
-        .login-box h1 { color:#f5d08b; font-size: 40px; margin-bottom:10px; letter-spacing: 2px; }
-        .login-box p { color: #d6b36a; margin-bottom: 20px; font-size: 14px; }
-        .login-box button {
-            padding:14px 45px; border:none; border-radius:50px;
-            background:#c48b37; color:white; font-size:16px;
-            cursor:pointer; transition:.3s; text-transform: uppercase; font-weight: bold;
-        }
-
-        /* القسم الرئيسي */
-        .hero {
-            width:100%; min-height:100vh; position:relative; overflow:hidden;
-            background: linear-gradient(rgba(15,10,5,.94), rgba(15,10,5,.94)), 
-                        linear-gradient(to bottom, #2b1d0e, #120c05);
-            display: flex; flex-direction: column;
-        }
-
-        .sand span {
-            position:absolute; width:2px; height:2px;
-            background:rgba(255,215,140,.4); border-radius:50%;
-            animation: sandFall linear infinite;
-        }
-
-        @keyframes sandFall {
-            0% { transform:translateY(-10vh) translateX(0); opacity:0; }
-            100% { transform:translateY(110vh) translateX(-50px); opacity:0; }
-        }
-
-        /* الأهرامات الجانبية المحدثة */
-        .bg-pyramid-left, .bg-pyramid-right {
-            position:absolute; bottom: 30%;
-            z-index:1; opacity:.05; pointer-events:none;
-        }
-
-        .bg-pyramid-left {
-            left: 50%; transform: translateX(-380px);
-            border-left: 100px solid transparent;
-            border-right: 100px solid transparent;
-            border-bottom: 180px solid #d6b36a;
-        }
-
-        .bg-pyramid-right {
-            left: 50%; transform: translateX(220px);
-            border-left: 80px solid transparent;
-            border-right: 80px solid transparent;
-            border-bottom: 140px solid #d6b36a;
-        }
-
-        /* تأثير اللمعة المطور - بطيء كل 3 ثواني */
-        .shine-text {
-            background: linear-gradient(to right, 
-                #f5d08b 0%, 
-                #f5d08b 45%, 
-                #fff 50%, 
-                #f5d08b 55%, 
-                #f5d08b 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShine 3s ease-in-out infinite;
-        }
-
-        @keyframes textShine {
-            0% { background-position: 200% center; }
-            100% { background-position: -200% center; }
-        }
-
-        /* الهرم الرئيسي */
-        .planet {
-            position:absolute; width:min(60vw, 380px); height:min(60vw, 380px);
-            top:50%; left:50%; transform:translate(-50%,-50%);
-            display:flex; justify-content:center; align-items:center;
-            animation:pyramidFloat 8s ease-in-out infinite; z-index:2;
-        }
-
-        .planet::before {
-            content:""; position:absolute;
-            border-left: min(30vw, 190px) solid transparent;
-            border-right: min(30vw, 190px) solid transparent;
-            border-bottom: min(50vw, 320px) solid #c89b52;
-            filter: drop-shadow(0 0 40px rgba(214, 179, 106, 0.2));
-        }
-
-        .planet::after {
-            content:"𓂀"; position:absolute; font-size: min(12vw, 80px);
-            color:#4d2b0a; top: 45%;
-        }
-
-        /* المحتوى */
+        .login-box button:hover { background:#c48b37; color:#000; box-shadow: 0 0 20px #c48b37; }
+        
+        /* باقي التصميم بنفس الإعدادات السابقة */
+        .hero { width:100%; min-height:100vh; position:relative; overflow:hidden; background: linear-gradient(rgba(15,10,5,.94), rgba(15,10,5,.94)), linear-gradient(to bottom, #2b1d0e, #120c05); display: flex; flex-direction: column; }
+        .planet { position:absolute; width:min(70vw, 400px); height:min(70vw, 400px); top:50%; left:50%; transform:translate(-50%,-50%); display:flex; justify-content:center; align-items:center; animation:pyramidFloat 6s ease-in-out infinite; z-index:2; }
+        .planet::before { content:""; position:absolute; border-left: min(35vw, 200px) solid transparent; border-right: min(35vw, 200px) solid transparent; border-bottom: min(55vw, 340px) solid #c89b52; filter: drop-shadow(0 0 50px rgba(214, 179, 106, 0.3)); }
+        .eye-of-horus { position:absolute; font-size: min(15vw, 90px); color:rgba(0,0,0,0.7); top: 45%; z-index: 3; }
+        
+        .ankh-box { width: 25%; display:flex; justify-content:center; animation: ankhMoveSides 5s ease-in-out infinite; }
+        @keyframes ankhMoveSides { 0%, 100% { transform: translateX(-25px); } 50% { transform: translateX(25px); } }
+        .ankh { font-size: clamp(120px, 18vw, 280px); color:rgba(214, 179, 106, 0.1); filter: drop-shadow(0 0 20px rgba(214, 179, 106, 0.2)); }
+        
         nav { width:100%; padding:30px 8%; display:flex; justify-content:center; z-index:10; }
-        .logo { font-size: 36px; font-weight:900; letter-spacing:6px; }
-
-        .content {
-            flex: 1; width:100%; display:flex; 
-            align-items:center; justify-content:space-between;
-            padding:0 10%; position:relative; z-index:3;
-        }
-
+        .logo { font-size: clamp(24px, 8vw, 36px); font-weight:900; letter-spacing:6px; }
+        .content { flex: 1; width:100%; display:flex; align-items:center; justify-content:space-between; padding:0 10%; position:relative; z-index:3; }
         .text { width:45%; }
         .text span.sub { letter-spacing:5px; color:#e0b96d; font-size:12px; font-weight: bold; }
-        .text h1 { font-size: clamp(38px, 6vw, 75px); line-height:1; margin:15px 0; font-weight: 800; }
+        .text h1 { font-size: clamp(35px, 7vw, 75px); line-height:1; margin:15px 0; font-weight: 800; }
         .text p { font-size: 16px; color:#f0dfbf; line-height: 1.6; margin-bottom:30px; background:rgba(255,215,120,.03); padding:20px; border-radius:15px; border:1px solid rgba(255,220,150,.1); }
-
-        .btn-contact {
-            display: inline-block; padding:12px 35px; border-radius:50px; 
-            border:1px solid #d9a34f; color:#fff; text-decoration:none; 
-            background:rgba(255,215,120,.05); transition: 0.3s;
-        }
+        .btn-contact { display: inline-block; padding:12px 35px; border-radius:50px; border:1px solid #d9a34f; color:#fff; text-decoration:none; background:rgba(255,215,120,.05); transition: 0.3s; }
         .btn-contact:hover { background:#d9a34f; color: #000; }
+        
+        .bottom { width:100%; display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding:20px 5%; background: linear-gradient(to top, rgba(15,10,5,1), transparent); z-index:5; }
+        .card { text-align: center; padding: 15px 5px; background: rgba(255,215,120,0.03); border-radius: 12px; border: 1px solid rgba(255,220,150,0.05); }
+        .card h2 { color:#f5d08b; font-size: clamp(18px, 4vw, 22px); margin-bottom: 5px; }
+        .card p { color:#a89068; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; }
 
-        .ankh-box { width: 25%; display:flex; justify-content:center; animation: floatX 7s ease-in-out infinite; }
-        .ankh { font-size: clamp(120px, 18vw, 280px); color:#d6b36a; filter: drop-shadow(0 0 20px rgba(214, 179, 106, 0.4)); }
-
-        /* البطاقات السفلية */
-        .bottom {
-            width:100%; display:grid; grid-template-columns: repeat(4, 1fr);
-            gap: 15px; padding:30px 10%; 
-            background: linear-gradient(to top, rgba(15,10,5,1), transparent);
-            z-index:5;
-        }
-
-        .card { text-align: center; padding: 15px; background: rgba(255,215,120,0.03); border-radius: 12px; border: 1px solid rgba(255,220,150,0.05); }
-        .card h2 { color:#f5d08b; font-size: 22px; margin-bottom: 5px; }
-        .card p { color:#a89068; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* تعديلات الموبايل - Mobile Experience */
         @media (max-width: 900px) {
-            body { overflow-y: auto; } /* تفعيل النزول في الموبايل */
-            .hero { height: auto; min-height: 100vh; padding-bottom: 100px; }
-            .bg-pyramid-left { transform: translateX(-140px); bottom: 45%; opacity: 0.03; }
-            .bg-pyramid-right { transform: translateX(60px); bottom: 45%; opacity: 0.03; }
-            .content { flex-direction: column-reverse; padding-top: 100px; gap: 40px; }
-            .text { width: 100%; text-align: center; }
-            .ankh-box { position: absolute; top: 5%; opacity: 0.2; width: 100%; z-index: -1; }
-            .bottom { grid-template-columns: repeat(2, 1fr); margin-top: 40px; }
-            .planet { opacity: 0.4; }
+            .content { flex-direction: column-reverse; padding-top: 60px; gap: 30px; text-align: center; }
+            .text { width: 100%; }
+            .ankh-box { position: absolute; top: 0%; opacity: 0.4; z-index: -1; width: 100%; }
+            .planet { top: 35%; opacity: 0.8; }
+            .bottom { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
         }
-
         @keyframes pyramidFloat { 0%, 100% { transform:translate(-50%,-50%) translateY(0); } 50% { transform:translate(-50%,-50%) translateY(-20px); } }
-        @keyframes floatX { 0%, 100% { transform:translateX(0); } 50% { transform:translateX(15px); } }
     </style>
 </head>
 
 <body oncontextmenu="return false;">
 
-<!-- Login Section - English -->
+<div class="sand-container" id="sandContainer"></div>
+
 <div class="login-screen" id="loginScreen">
     <div class="login-box">
-        <h1>LOGIN</h1>
-        <p>Unlock the Egyptian Experience</p>
-        <button id="enterBtn">ENTER NOW</button>
+        <h1 class="shine-text">WELCOME</h1>
+        <p style="color: #c48b37; margin: 10px 0; letter-spacing: 2px;">I AM EGYPTIAN | DIGITAL ARCHITECT</p>
+        <button id="enterBtn">ENTER EXPERIENCE</button>
     </div>
 </div>
 
@@ -194,22 +107,20 @@
 </audio>
 
 <section class="hero">
-    <div class="sand" id="sandContainer"></div>
-    <div class="bg-pyramid-left"></div>
-    <div class="bg-pyramid-right"></div>
-    <div class="planet"></div>
+    <div class="planet">
+        <div class="eye-of-horus">𓂀</div>
+    </div>
 
     <nav>
         <div class="logo shine-text">KARIM ELSAYED</div>
     </nav>
 
     <div class="content">
-        <!-- English Content -->
         <div class="text">
             <span class="sub">FRONTEND SPECIALIST</span>
-            <h1 class="shine-text">I AM <br> EGYPTIAN</h1>
-            <p>I am a professional Frontend Developer dedicated to building high-performance, modern, and fully responsive websites that provide a unique user experience.</p>
-            <a href="https://wa.me/201063566783" target="_blank" class="btn-contact">Get In Touch</a>
+            <h1 class="shine-text">IM <br> EGYPTION</h1>
+            <p>I am a professional Frontend Developer dedicated to building high-performance, modern, and fully responsive websites that provide a unique user experience</p>
+            <a href="https://wa.me/201063566783" target="_blank" class="btn-contact">GET IN TOUCH</a>
         </div>
 
         <div class="ankh-box">
@@ -217,24 +128,24 @@
         </div>
     </div>
 
-    <!-- Cards Section -->
     <div class="bottom">
         <div class="card"><h2>20</h2><p>Years Old</p></div>
         <div class="card"><h2>SGU</h2><p>University</p></div>
         <div class="card"><h2>Egypt</h2><p>Country</p></div>
-        <div class="card"><h2>FRONTEND</h2><p>Developer</p></div>
+        <div class="card"><h2>PRO</h2><p>Frontend</p></div>
     </div>
 </section>
 
 <script>
-    // إنشاء حبات الرمل
-    const container = document.getElementById('sandContainer');
-    for (let i = 0; i < 40; i++) {
-        const span = document.createElement('span');
+    const sandContainer = document.getElementById('sandContainer');
+    const grainCount = 100;
+    for (let i = 0; i < grainCount; i++) {
+        const span = document.createElement('div');
+        span.className = 'sand-grain';
         span.style.left = Math.random() * 100 + '%';
-        span.style.animationDuration = (Math.random() * 5 + 5) + 's';
-        span.style.animationDelay = (Math.random() * -10) + 's';
-        container.appendChild(span);
+        span.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        span.style.animationDelay = (Math.random() * -5) + 's';
+        sandContainer.appendChild(span);
     }
 
     const enterBtn = document.getElementById("enterBtn");
@@ -242,16 +153,14 @@
     const music = document.getElementById("bgMusic");
 
     enterBtn.addEventListener("click", () => {
-        music.volume = 0.2;
+        music.volume = 0.3;
         music.play().catch(() => {});
         loginScreen.style.opacity = "0";
         setTimeout(() => loginScreen.style.display = "none", 800);
     });
 
-    // حماية السورس كود
     document.onkeydown = function(e) {
-        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) 
-        return false;
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0)))) return false;
     };
 </script>
 
