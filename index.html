@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Egyptian Space Portfolio</title>
+  <title>KARIM</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
@@ -23,6 +23,56 @@
       user-select:none;
     }
 
+    /* شاشة الدخول */
+
+    .login-screen{
+      position:fixed;
+      inset:0;
+      background:#0b0703;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:99999;
+    }
+
+    .login-box{
+      text-align:center;
+      padding:40px;
+      border-radius:20px;
+      background:rgba(255,215,120,.05);
+      border:1px solid rgba(255,220,150,.15);
+      backdrop-filter:blur(10px);
+    }
+
+    .login-box h1{
+      color:#f5d08b;
+      font-size:45px;
+      margin-bottom:10px;
+    }
+
+    .login-box p{
+      color:#f3dfba;
+      margin-bottom:25px;
+    }
+
+    .login-box button{
+      padding:14px 40px;
+      border:none;
+      border-radius:50px;
+      background:#c48b37;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .login-box button:hover{
+      transform:scale(1.05);
+
+      box-shadow:
+      0 0 20px rgba(255,190,90,.4);
+    }
+
     .hero{
       width:100%;
       height:100vh;
@@ -30,24 +80,122 @@
       overflow:hidden;
 
       background:
-      radial-gradient(circle at center,rgba(212,176,109,.10) 0%,transparent 35%),
-      radial-gradient(circle at top,rgba(255,204,120,.08) 0%,transparent 40%),
-      linear-gradient(to bottom,#1a1208,#0f0a05);
+      linear-gradient(
+      rgba(15,10,5,.93),
+      rgba(15,10,5,.93)
+      ),
+
+      linear-gradient(
+      to bottom,
+      #2b1d0e,
+      #120c05
+      );
+    }
+
+    /* رمال متحركة */
+
+    .sand{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    .sand span{
+      position:absolute;
+      display:block;
+      width:3px;
+      height:3px;
+      background:rgba(255,215,140,.55);
+      border-radius:50%;
+      filter:blur(.3px);
+
+      animation:sandFall linear infinite;
+    }
+
+    .sand span:nth-child(1){left:5%;animation-duration:11s;animation-delay:-2s;}
+    .sand span:nth-child(2){left:10%;animation-duration:9s;animation-delay:-5s;}
+    .sand span:nth-child(3){left:15%;animation-duration:12s;animation-delay:-3s;}
+    .sand span:nth-child(4){left:20%;animation-duration:10s;animation-delay:-6s;}
+    .sand span:nth-child(5){left:25%;animation-duration:14s;animation-delay:-2s;}
+    .sand span:nth-child(6){left:30%;animation-duration:9s;animation-delay:-7s;}
+    .sand span:nth-child(7){left:35%;animation-duration:13s;animation-delay:-4s;}
+    .sand span:nth-child(8){left:40%;animation-duration:11s;animation-delay:-6s;}
+    .sand span:nth-child(9){left:45%;animation-duration:8s;animation-delay:-2s;}
+    .sand span:nth-child(10){left:50%;animation-duration:12s;animation-delay:-5s;}
+    .sand span:nth-child(11){left:55%;animation-duration:10s;animation-delay:-3s;}
+    .sand span:nth-child(12){left:60%;animation-duration:14s;animation-delay:-8s;}
+    .sand span:nth-child(13){left:65%;animation-duration:9s;animation-delay:-2s;}
+    .sand span:nth-child(14){left:70%;animation-duration:11s;animation-delay:-4s;}
+    .sand span:nth-child(15){left:75%;animation-duration:13s;animation-delay:-6s;}
+    .sand span:nth-child(16){left:80%;animation-duration:9s;animation-delay:-2s;}
+    .sand span:nth-child(17){left:85%;animation-duration:12s;animation-delay:-5s;}
+    .sand span:nth-child(18){left:90%;animation-duration:10s;animation-delay:-3s;}
+    .sand span:nth-child(19){left:95%;animation-duration:14s;animation-delay:-7s;}
+    .sand span:nth-child(20){left:98%;animation-duration:11s;animation-delay:-4s;}
+
+    @keyframes sandFall{
+
+      0%{
+        transform:translateY(-100px) translateX(0px);
+        opacity:0;
+      }
+
+      10%{
+        opacity:.7;
+      }
+
+      100%{
+        transform:translateY(120vh) translateX(-120px);
+        opacity:0;
+      }
 
     }
 
-    .hero::before{
-      content:"";
+    /* الأهرامات الخلفية */
 
+    .bg-pyramid-left,
+    .bg-pyramid-right{
       position:absolute;
-      inset:0;
-
-      background:
-      url("https://www.transparenttextures.com/patterns/arabesque.png");
-
+      z-index:0;
       opacity:.08;
+      pointer-events:none;
 
-      mix-blend-mode:screen;
+      filter:
+      drop-shadow(0 0 18px rgba(255,210,120,.12));
+    }
+
+    .bg-pyramid-left{
+
+      top:50%;
+      left:50%;
+
+      transform:
+      translate(-320px,-38%);
+
+      width:0;
+      height:0;
+
+      border-left:110px solid transparent;
+      border-right:110px solid transparent;
+      border-bottom:210px solid #d6b36a;
+    }
+
+    .bg-pyramid-right{
+
+      top:50%;
+      left:50%;
+
+      transform:
+      translate(140px,-35%);
+
+      width:0;
+      height:0;
+
+      border-left:95px solid transparent;
+      border-right:95px solid transparent;
+      border-bottom:180px solid #d6b36a;
     }
 
     .stars{
@@ -57,7 +205,7 @@
 
       background:url("https://www.transparenttextures.com/patterns/stardust.png");
 
-      opacity:.35;
+      opacity:.18;
 
       animation: starsMove 120s linear infinite;
     }
@@ -74,8 +222,6 @@
 
     }
 
-    /* الهرم */
-
     .planet{
       position:absolute;
       width:420px;
@@ -91,6 +237,8 @@
       align-items:center;
 
       animation:pyramidFloat 8s ease-in-out infinite;
+
+      z-index:2;
     }
 
     .planet::before{
@@ -121,10 +269,6 @@
       color:#5e350d;
 
       top:155px;
-
-      text-shadow:
-      0 0 8px rgba(255,255,255,.08),
-      0 0 15px rgba(0,0,0,.35);
     }
 
     @keyframes pyramidFloat{
@@ -180,7 +324,7 @@
       padding:0 100px;
 
       position:relative;
-      z-index:2;
+      z-index:3;
     }
 
     .text{
@@ -190,11 +334,8 @@
 
     .small{
       letter-spacing:5px;
-
       color:#e0b96d;
-
       margin-bottom:15px;
-
       font-size:12px;
     }
 
@@ -264,8 +405,6 @@
       box-shadow:
       0 0 25px rgba(255,190,90,.5);
     }
-
-    /* رمز مفتاح الحياة */
 
     .frame-wrapper{
       width:40%;
@@ -377,46 +516,80 @@
       font-size:14px;
     }
 
-    @media(max-width:1100px){
-
-      .content{
-        flex-direction:column;
-        justify-content:center;
-        gap:60px;
-        text-align:center;
-      }
-
-      .text{
-        width:100%;
-        margin-left:0;
-      }
-
-      .frame-wrapper{
-        width:100%;
-      }
-
-      .text h1{
-        font-size:55px;
-      }
-
-      .bottom{
-        display:none;
-      }
-
-      body{
-        overflow:auto;
-      }
-
-    }
-
   </style>
 </head>
 
 <body>
 
+<!-- شاشة الدخول -->
+
+<div class="login-screen" id="loginScreen">
+
+  <div class="login-box">
+
+    <h1>WELCOME</h1>
+
+    <p>Click To Enter</p>
+
+    <button id="enterBtn">
+      LOGIN
+    </button>
+
+  </div>
+
+</div>
+
+<!-- الموسيقى -->
+
+<audio id="bgMusic" loop>
+  <source src="one.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const enterBtn = document.getElementById("enterBtn");
+
+const loginScreen = document.getElementById("loginScreen");
+
+const music = document.getElementById("bgMusic");
+
+music.volume = 0.2;
+
+enterBtn.addEventListener("click", () => {
+
+  music.play();
+
+  loginScreen.style.opacity = "0";
+
+  loginScreen.style.pointerEvents = "none";
+
+  setTimeout(() => {
+    loginScreen.style.display = "none";
+  }, 500);
+
+});
+
+</script>
+
 <section class="hero">
 
+  <!-- الرمال -->
+
+  <div class="sand">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- أهرامات الخلفية -->
+
+  <div class="bg-pyramid-left"></div>
+  <div class="bg-pyramid-right"></div>
+
   <div class="stars"></div>
+
+  <!-- الهرم الرئيسي -->
 
   <div class="planet"></div>
 
@@ -498,65 +671,6 @@
   </div>
 
 </section>
-
-<!-- حماية الموقع -->
-
-<script>
-
-  // منع كليك يمين
-  document.addEventListener('contextmenu', function(e){
-    e.preventDefault();
-  });
-
-  // منع النسخ والتحديد
-  document.addEventListener('copy', function(e){
-    e.preventDefault();
-  });
-
-  document.addEventListener('cut', function(e){
-    e.preventDefault();
-  });
-
-  document.addEventListener('selectstart', function(e){
-    e.preventDefault();
-  });
-
-  // منع بعض الاختصارات
-  document.addEventListener('keydown', function(e){
-
-    // F12
-    if(e.key === "F12"){
-      e.preventDefault();
-    }
-
-    // F11
-    if(e.key === "F11"){
-      e.preventDefault();
-    }
-
-    // Ctrl + Shift + I
-    if(e.ctrlKey && e.shiftKey && e.key === "I"){
-      e.preventDefault();
-    }
-
-    // Ctrl + Shift + J
-    if(e.ctrlKey && e.shiftKey && e.key === "J"){
-      e.preventDefault();
-    }
-
-    // Ctrl + U
-    if(e.ctrlKey && e.key.toLowerCase() === "u"){
-      e.preventDefault();
-    }
-
-    // Ctrl + C
-    if(e.ctrlKey && e.key.toLowerCase() === "c"){
-      e.preventDefault();
-    }
-
-  });
-
-</script>
 
 </body>
 </html>
